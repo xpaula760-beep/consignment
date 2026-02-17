@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
+import { fetchPackageByTrackingNumber } from "../services/package.api";
 import dynamic from "next/dynamic";
 import ItemCarousel from "../components/ItemCarousel";
 
@@ -121,12 +121,8 @@ export default function TrackPackagePage() {
 
     try {
       setLoading(true);
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/packages/track/${encodeURIComponent(
-          trackingNumber.trim()
-        )}`
-      );
-      setPkg(res.data);
+      const data = await fetchPackageByTrackingNumber(trackingNumber.trim());
+      setPkg(data);
     } catch {
       setError("Package not found. Please check tracking number.");
     } finally {

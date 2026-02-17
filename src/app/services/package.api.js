@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const rawBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-const normalizedBase = rawBase.replace(/\/$/, "") + "/api";
+// If NEXT_PUBLIC_API_URL is set use it; otherwise default to a relative `/api` so
+// the client will call the same origin in production (avoids 'undefined' in URLs).
+const rawBase = process.env.NEXT_PUBLIC_API_URL || "";
+const normalizedBase = rawBase ? rawBase.replace(/\/$/, "") + "/api" : "/api";
 
 const api = axios.create({
   baseURL: normalizedBase,
@@ -19,6 +21,11 @@ export const fetchPackages = async () => {
 
 export const fetchPackageById = async (id) => {
   const res = await api.get(`/packages/${id}`);
+  return res.data;
+};
+
+export const fetchPackageByTrackingNumber = async (trackingNumber) => {
+  const res = await api.get(`/packages/track/${encodeURIComponent(trackingNumber)}`);
   return res.data;
 };
 
