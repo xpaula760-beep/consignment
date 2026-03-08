@@ -58,7 +58,7 @@ export default function AdminPackages() {
       {/* Mobile FAB */}
       <button
         onClick={() => setShowForm(true)}
-        className="md:hidden fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-black text-white text-2xl shadow-lg"
+        className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-14 h-14 rounded-full bg-black text-white text-2xl shadow-lg"
       >
         +
       </button>
@@ -150,6 +150,24 @@ export default function AdminPackages() {
           onSaved={loadPackages}
         />
       )}
+    </div>
+  );
+}
+
+function Modal({ children, onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
+      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
+          <h2 className="text-xl font-bold">Add Package</h2>
+          <button onClick={onClose} className="text-2xl text-zinc-500 hover:text-zinc-900">
+            ×
+          </button>
+        </div>
+        <div className="p-6">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
