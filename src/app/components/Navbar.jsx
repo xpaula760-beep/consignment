@@ -18,8 +18,8 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-6 text-sm text-zinc-700">
           <Link href="/track" className="hover:text-zinc-900">Track</Link>
-          <Link href="/pricing" className="hover:text-zinc-900">Pricing</Link>
-          <Link href="/admin" className="hover:text-zinc-900">Admin</Link>
+          <Link href="/get-started" className="hover:text-zinc-900">Get Started</Link>
+         
         </div>
 
         <div className="md:hidden">
