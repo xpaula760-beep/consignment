@@ -376,23 +376,7 @@ function PackageDetails({ pkg, onOpen }) {
   );
 }
 
-function TrackPackageFallback() {
-  return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.18),rgba(15,23,42,1)_35%,rgba(2,6,23,1))] px-4 py-12 text-white">
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs uppercase tracking-[0.28em] text-cyan-100/80">
-            Live delivery tracking
-          </div>
-          <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-5xl">Track your shipment</h1>
-          <p className="mt-4 text-base leading-7 text-slate-300 md:text-lg">Loading tracker…</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TrackPackageContent() {
+function TrackPackagePageContent() {
   const searchParams = useSearchParams();
   const [showDetails, setShowDetails] = useState(false);
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -497,8 +481,22 @@ function TrackPackageContent() {
 
 export default function TrackPackagePage() {
   return (
-    <Suspense fallback={<TrackPackageFallback />}>
-      <TrackPackageContent />
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.18),rgba(15,23,42,1)_35%,rgba(2,6,23,1))] px-4 py-12 text-white">
+          <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs uppercase tracking-[0.28em] text-cyan-100/80">
+                Live delivery tracking
+              </div>
+              <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-5xl">Track your shipment</h1>
+              <p className="mt-4 text-base leading-7 text-slate-300 md:text-lg">Loading tracking search…</p>
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <TrackPackagePageContent />
     </Suspense>
   );
 }
