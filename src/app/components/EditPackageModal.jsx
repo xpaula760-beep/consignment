@@ -38,17 +38,17 @@ export default function EditPackageModal({ id, onClose, onSaved }) {
   if (!pkg) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:p-4 md:items-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative w-full max-w-3xl md:max-w-2xl bg-white rounded-xl p-4 md:p-6 z-10 max-h-[90vh] overflow-auto">
+      <div className="relative z-10 flex max-h-dvh w-full flex-col overflow-hidden rounded-t-3xl bg-white p-4 shadow-xl sm:max-h-[90vh] sm:max-w-3xl sm:rounded-xl md:p-6">
         <button className="absolute top-3 right-3 p-2 rounded hover:bg-zinc-100" onClick={onClose} aria-label="Close">✕</button>
 
-        <div className="space-y-4">
+        <div className="space-y-4 overflow-y-auto pr-0 sm:pr-1">
           <div className="pb-4 md:pb-6">
             <h3 className="text-lg font-semibold">Edit Package</h3>
             <p className="text-sm text-zinc-500">Make changes and save. Scroll within this dialog on small screens.</p>
 
-            <div className="mt-3 grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+            <div className="mt-3 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
               <div><span className="font-semibold">Package:</span> {pkg.itemName || "—"}</div>
               <div><span className="font-semibold">Tracking:</span> {pkg.trackingNumber || "—"}</div>
               <div><span className="font-semibold">Value:</span> {(typeof pkg.totalValue !== 'undefined' ? `${pkg.currency || 'USD'} ${pkg.totalValue}` : "—")}</div>
@@ -56,7 +56,7 @@ export default function EditPackageModal({ id, onClose, onSaved }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-2">
             <div className="md:col-span-1">
               <PackageForm initialData={pkg} onSubmit={handleSave} loading={loading} />
             </div>
@@ -64,7 +64,7 @@ export default function EditPackageModal({ id, onClose, onSaved }) {
             <div className="md:col-span-1 space-y-4">
               <div className="p-3 border rounded">
                 <h4 className="font-medium">Preview</h4>
-                <div className="mt-3 grid grid-cols-2 gap-2">
+                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
                   {pkg.images && pkg.images.length ? (
                     pkg.images.map((img, i) => (
                       <img key={i} src={img.secure_url} alt={`img-${i}`} className="w-full h-28 object-cover rounded" />
@@ -107,8 +107,8 @@ export default function EditPackageModal({ id, onClose, onSaved }) {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-zinc-100 flex items-center justify-start gap-4">
-            <div>
+          <div className="flex flex-col gap-3 border-t border-zinc-100 pt-4 sm:flex-row sm:items-center sm:justify-start sm:gap-4">
+            <div className="w-full sm:w-auto">
               <button className="btn-danger mr-2" onClick={handleDelete} disabled={loading}>Delete</button>
             </div>
             <div className="text-sm text-zinc-500">Use the form&apos;s Save button to persist changes.</div>

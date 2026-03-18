@@ -164,15 +164,15 @@ export default function AdminPackages() {
 
 function Modal({ children, onClose }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-0 sm:items-center sm:p-4" onClick={onClose}>
+      <div className="max-h-dvh w-full overflow-auto rounded-t-3xl bg-white shadow-xl sm:max-h-[90vh] sm:max-w-4xl sm:rounded-lg" onClick={(e) => e.stopPropagation()}>
+        <div className="sticky top-0 flex items-center justify-between border-b bg-white px-4 py-4 sm:px-6">
           <h2 className="text-xl font-bold">Add Package</h2>
           <button onClick={onClose} className="text-2xl text-zinc-500 hover:text-zinc-900">
             ×
           </button>
         </div>
-        <div className="p-6">
+        <div className="p-3 sm:p-6">
           {children}
         </div>
       </div>

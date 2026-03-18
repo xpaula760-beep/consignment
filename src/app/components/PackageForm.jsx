@@ -198,22 +198,22 @@ export default function PackageForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-4xl border border-white/10 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.16),rgba(15,23,42,0.95)_40%,rgba(2,6,23,1))] p-4 text-white md:p-6"
+      className="space-y-5 overflow-x-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.16),rgba(15,23,42,0.95)_40%,rgba(2,6,23,1))] p-3 text-white sm:space-y-6 sm:rounded-4xl sm:p-4 md:p-6"
     >
-      <div className="rounded-[28px] border border-cyan-400/20 bg-cyan-400/10 p-5 shadow-[0_24px_80px_-50px_rgba(34,211,238,0.85)]">
+      <div className="rounded-[24px] border border-cyan-400/20 bg-cyan-400/10 p-4 shadow-[0_24px_80px_-50px_rgba(34,211,238,0.85)] sm:rounded-[28px] sm:p-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">
+          <div className="min-w-0">
+            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/20 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-200 sm:text-xs sm:tracking-[0.24em]">
               <Sparkles className="h-4 w-4" />
               Cloudinary-ready shipment form
             </div>
-            <h2 className="mt-3 text-2xl font-semibold">Create a shipment with image and video proof</h2>
-            <p className="mt-2 text-sm text-slate-200">
+            <h2 className="mt-3 text-xl font-semibold sm:text-2xl">Create a shipment with image and video proof</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-200">
               Upload package photos, delivery videos, and item snapshots in one flow. Videos are sent to Cloudinary from the backend.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 text-sm md:min-w-72">
+          <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 md:min-w-72">
             <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
               <div className="text-slate-400">Assets</div>
               <div className="mt-1 text-2xl font-semibold">{totals.assetCount}</div>
@@ -365,8 +365,8 @@ export default function PackageForm({
           </section>
 
           <section className={panelClass}>
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
+            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-3 sm:items-center">
                 <div className="rounded-2xl bg-fuchsia-400/15 p-3 text-fuchsia-300">
                   <Box className="h-5 w-5" />
                 </div>
@@ -378,18 +378,18 @@ export default function PackageForm({
 
               <button
                 type="button"
-                className="rounded-2xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-200 transition hover:bg-cyan-400/20"
+                className="w-full rounded-2xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-200 transition hover:bg-cyan-400/20 sm:w-auto"
                 onClick={addItem}
               >
                 Add Item
               </button>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <input type="number" step="0.01" name="baseValue" placeholder="Declared package value" className={inputClass} value={form.baseValue} onChange={handleChange} />
               <input type="number" step="0.01" name="shippingCost" placeholder="Shipping cost" className={inputClass} value={form.shippingCost} onChange={handleChange} />
               <input name="currency" placeholder="Currency" className={inputClass} value={form.currency} onChange={handleChange} />
-              <div className="rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-slate-300">
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 sm:col-span-2 xl:col-span-1">
                 Item total: <span className="font-semibold text-white">{form.currency} {totals.itemsValue.toFixed(2)}</span>
               </div>
             </div>
@@ -403,14 +403,14 @@ export default function PackageForm({
 
               {itemsData.map((it, idx) => (
                 <div key={idx} className="rounded-3xl border border-white/10 bg-slate-950/60 p-4">
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <h4 className="font-semibold">Item {idx + 1}</h4>
                       <p className="text-sm text-slate-400">Attach close-up images for this item.</p>
                     </div>
                     <button
                       type="button"
-                      className="inline-flex items-center gap-2 rounded-2xl border border-red-400/20 bg-red-400/10 px-3 py-2 text-sm text-red-200 hover:bg-red-400/20"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-red-400/20 bg-red-400/10 px-3 py-2 text-sm text-red-200 hover:bg-red-400/20 sm:w-auto"
                       onClick={() => setItemsData((state) => state.filter((_, itemIndex) => itemIndex !== idx))}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -418,17 +418,17 @@ export default function PackageForm({
                     </button>
                   </div>
 
-                  <div className="mt-4 grid gap-4 md:grid-cols-3">
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                     <input name={`item-name-${idx}`} placeholder="Item name" className={inputClass} value={it.name} onChange={(e) => updateItem(idx, (current) => ({ ...current, name: e.target.value }))} />
                     <input name={`item-value-${idx}`} placeholder="Value in USD" className={inputClass} value={it.valueUSD} onChange={(e) => updateItem(idx, (current) => ({ ...current, valueUSD: e.target.value }))} />
-                    <label className="rounded-2xl border border-dashed border-white/15 bg-slate-950/40 px-4 py-3 text-sm text-slate-300 transition hover:border-cyan-400/40 hover:bg-slate-900/70">
+                    <label className="rounded-2xl border border-dashed border-white/15 bg-slate-950/40 px-4 py-3 text-sm text-slate-300 transition hover:border-cyan-400/40 hover:bg-slate-900/70 sm:col-span-2 xl:col-span-1">
                       <span className="block font-medium">Item photos</span>
                       <span className="mt-1 block text-xs text-slate-400">PNG, JPG, WEBP</span>
                       <input
                         type="file"
                         multiple
                         accept="image/*"
-                        className="mt-3 block w-full text-xs text-slate-300 file:mr-3 file:rounded-xl file:border-0 file:bg-cyan-400/20 file:px-3 file:py-2 file:text-cyan-200"
+                        className="mt-3 block w-full min-w-0 text-xs text-slate-300 file:mr-3 file:mb-2 file:rounded-xl file:border-0 file:bg-cyan-400/20 file:px-3 file:py-2 file:text-cyan-200 sm:file:mb-0"
                         onChange={(e) => {
                           const files = Array.from(e.target.files || []);
                           updateItem(idx, (current) => ({
@@ -464,7 +464,7 @@ export default function PackageForm({
                       <div key={preview.id || previewIndex} className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-slate-900/80">
                         <img src={preview.url} className="h-28 w-full object-cover" alt={preview.name} />
                         <div className="border-t border-white/10 px-3 py-2 text-xs text-slate-300">
-                          <div className="truncate">{preview.name}</div>
+                          <div className="break-all">{preview.name}</div>
                           <div className="text-slate-500">{formatBytes(preview.size)}</div>
                         </div>
                       </div>
@@ -495,7 +495,7 @@ export default function PackageForm({
                 type="file"
                 multiple
                 accept="image/*"
-                className="mt-4 block w-full text-xs text-slate-300 file:mr-3 file:rounded-xl file:border-0 file:bg-cyan-400/20 file:px-3 file:py-2 file:text-cyan-200"
+                className="mt-4 block w-full min-w-0 text-xs text-slate-300 file:mr-3 file:mb-2 file:rounded-xl file:border-0 file:bg-cyan-400/20 file:px-3 file:py-2 file:text-cyan-200 sm:file:mb-0"
                 onChange={(e) => {
                   const files = Array.from(e.target.files || []);
                   setFileUploads(files);
@@ -522,7 +522,7 @@ export default function PackageForm({
                 <div key={image.id || index} className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-slate-900/80">
                   <img src={image.url} className="h-36 w-full object-cover" alt={image.name} />
                   <div className="border-t border-white/10 px-3 py-2 text-xs text-slate-300">
-                    <div className="truncate">{image.name}</div>
+                    <div className="break-all">{image.name}</div>
                     <div className="text-slate-500">{formatBytes(image.size)}</div>
                   </div>
                 </div>
@@ -548,7 +548,7 @@ export default function PackageForm({
                 type="file"
                 multiple
                 accept="video/*"
-                className="mt-4 block w-full text-xs text-slate-300 file:mr-3 file:rounded-xl file:border-0 file:bg-violet-400/20 file:px-3 file:py-2 file:text-violet-200"
+                className="mt-4 block w-full min-w-0 text-xs text-slate-300 file:mr-3 file:mb-2 file:rounded-xl file:border-0 file:bg-violet-400/20 file:px-3 file:py-2 file:text-violet-200 sm:file:mb-0"
                 onChange={(e) => {
                   const files = Array.from(e.target.files || []);
                   setVideoUploads(files);
@@ -581,7 +581,7 @@ export default function PackageForm({
                 <div key={video.id || index} className="overflow-hidden rounded-2xl border border-violet-400/20 bg-slate-900/80">
                   <video controls preload="metadata" src={video.url} className="h-48 w-full bg-black object-cover" />
                   <div className="border-t border-white/10 px-3 py-2 text-xs text-slate-300">
-                    <div className="truncate font-medium">{video.name}</div>
+                    <div className="break-all font-medium">{video.name}</div>
                     <div className="text-slate-500">{formatBytes(video.size)}</div>
                   </div>
                 </div>
