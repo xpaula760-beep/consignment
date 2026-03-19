@@ -86,7 +86,10 @@ const emptyForm = {
 export default function PackageForm({
   onSubmit,
   loading = false,
-  initialData = null
+  initialData = null,
+  formId,
+  submitLabel = "Save package",
+  showSubmitButton = true
 }) {
   const [form, setForm] = useState(() => buildFormState(initialData));
   const [existingImages, setExistingImages] = useState(() => normalizeMedia(initialData?.images || [], "existing-image"));
@@ -197,10 +200,11 @@ export default function PackageForm({
 
   return (
     <form
+      id={formId}
       onSubmit={handleSubmit}
-      className="space-y-5 overflow-x-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.16),rgba(15,23,42,0.95)_40%,rgba(2,6,23,1))] p-3 text-white sm:space-y-6 sm:rounded-4xl sm:p-4 md:p-6"
+      className="space-y-5 overflow-x-hidden rounded-4xl border border-white/10 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.16),rgba(15,23,42,0.95)_40%,rgba(2,6,23,1))] p-3 text-white sm:space-y-6 sm:rounded-4xl sm:p-4 md:p-6"
     >
-      <div className="rounded-[24px] border border-cyan-400/20 bg-cyan-400/10 p-4 shadow-[0_24px_80px_-50px_rgba(34,211,238,0.85)] sm:rounded-[28px] sm:p-5">
+      <div className="rounded-3xl border border-cyan-400/20 bg-cyan-400/10 p-4 shadow-[0_24px_80px_-50px_rgba(34,211,238,0.85)] sm:rounded-[28px] sm:p-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="min-w-0">
             <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/20 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-200 sm:text-xs sm:tracking-[0.24em]">
@@ -606,13 +610,15 @@ export default function PackageForm({
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading ? "Saving package..." : "Save package"}
-            </button>
+            {showSubmitButton ? (
+              <button
+                type="submit"
+                disabled={loading}
+                className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {loading ? "Saving package..." : submitLabel}
+              </button>
+            ) : null}
           </section>
         </div>
       </div>
