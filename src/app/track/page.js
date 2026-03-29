@@ -103,7 +103,7 @@ function MediaRail({ images, videos, onOpen }) {
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
-        {cards.slice(0, 3).map(({ type, asset, key }) => (
+        {cards.slice(0, 6).map(({ type, asset, key }) => (
           <div key={key} className="group overflow-hidden rounded-3xl border border-white/10 bg-slate-950/70">
             <div className="relative aspect-video overflow-hidden bg-black">
               {type === "video" ? (
@@ -402,6 +402,15 @@ function TrackPackagePageContent() {
         setError("Package not found. Please check the tracking number.");
         return;
       }
+      // debug: quickly log media counts to help diagnose missing images
+      try {
+        // eslint-disable-next-line no-console
+        console.debug("Loaded package", data.trackingNumber, {
+          images: Array.isArray(data.images) ? data.images.length : 0,
+          videos: Array.isArray(data.videos) ? data.videos.length : 0,
+          items: Array.isArray(data.items) ? data.items.length : 0
+        });
+      } catch (e) {}
       setPkg(data);
     } catch {
       setError("Package not found. Please check the tracking number.");
